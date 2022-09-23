@@ -35,3 +35,10 @@ export const TitleText = styled.div`
 export const DataText = styled.div`
     font-size: 25px;
 `
+
+export const Title = styled.div`
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    margin-top: 2rem;
+`

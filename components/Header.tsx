@@ -27,7 +27,9 @@ const LinkWrapper = styled.div`
     width: 100%;
 `
 const TitleWrapper = styled.div`
-    margin: 20px
+    margin: 20px;
+    font-weight: bold;
+    white-space: nowrap;
 `
 
 function Nav({ name, path }: { name: string, path: string }) {
@@ -51,14 +53,14 @@ function Header({ children }) {
         <>
             <HeaderWrapper>
                 <TitleWrapper>
-                    <h3>
-                        Bebop
-                    </h3>
+                    <span>
+                        Bebop Monitor
+                    </span>
                 </TitleWrapper>
                 <LinkWrapper>
                     <Events>
                         <Nav name="Orders" path="/orders" />
-                        <Nav name="Users" path="/users" />
+                        <Nav name="User" path="/user" />
                     </Events>
                 </LinkWrapper>
 

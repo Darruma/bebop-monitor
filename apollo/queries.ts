@@ -26,3 +26,73 @@ export const LOAD_ORDERS = gql`
         }
     }
 `
+
+export const LOAD_USER_DATA = gql`
+    query loadUserData($addr: ID!) {
+        user(id: $addr) {
+            id
+            makerOrders(first: 10, orderBy: blockNumber, orderDirection: desc) {
+                id
+                blockNumber
+                maker {
+                    id
+                }
+                taker {
+                    id
+                }
+                baseAmounts
+                quoteAmounts
+                baseTokens(first:10) {
+                    id
+                    symbol
+                    decimals
+                }
+                quoteTokens(first: 10) {
+                    id
+                    symbol
+                    decimals
+                }
+            }
+            takerOrders(first: 10, orderBy: blockNumber, orderDirection: desc) {
+                id
+                blockNumber
+                maker {
+                    id
+                }
+                taker {
+                    id
+                }
+                baseAmounts
+                quoteAmounts
+                baseTokens(first:10) {
+                    id
+                    symbol
+                    decimals
+                }
+                quoteTokens(first: 10) {
+                    id
+                    symbol
+                    decimals
+                }
+            }
+            makerTokenVolume(first: 10, orderBy: amount, orderDirection: desc) {
+                id
+                amount
+                token {
+                    id
+                    symbol
+                    decimals
+                }
+            }
+            takerTokenVolume(first: 10, orderBy: amount, orderDirection: desc) {
+                id
+                amount
+                token {
+                    id
+                    symbol
+                    decimals
+                }
+            }
+        }
+    } 
+`
