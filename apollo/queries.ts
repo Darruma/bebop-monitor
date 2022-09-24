@@ -75,7 +75,7 @@ export const LOAD_USER_DATA = gql`
                     decimals
                 }
             }
-            makerTokenVolume(first: 10, orderBy: amount, orderDirection: desc) {
+            makerTokenVolumes(first: 17, orderBy: amount, orderDirection: desc) {
                 id
                 amount
                 token {
@@ -84,7 +84,7 @@ export const LOAD_USER_DATA = gql`
                     decimals
                 }
             }
-            takerTokenVolume(first: 10, orderBy: amount, orderDirection: desc) {
+            takerTokenVolumes(first: 17, orderBy: amount, orderDirection: desc) {
                 id
                 amount
                 token {

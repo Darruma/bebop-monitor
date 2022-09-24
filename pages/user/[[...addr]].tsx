@@ -2,9 +2,9 @@ import { useRouter } from "next/router"
 import styled from "styled-components"
 import { usePolledQuery } from "../../apollo/hooks"
 import { LOAD_USER_DATA } from "../../apollo/queries"
-import { ItemsWrapper, ItemWrapper, DataWrapper, DataText, TitleText, Title } from "../../components/Events"
+import { Title } from "../../components/Events"
 import { Orders } from "../../components/Orders"
-import { ETHERSCAN_URL } from "../../constants"
+import { Volumes } from "../../components/Volumes"
 
 export const SearchContainer = styled.div`
     box-sizing: border-box;
@@ -37,16 +37,15 @@ export const SearchInput = styled.input`
 `
 export const UserWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     margin: 0
     color: white;
 `
 const UserOrdersWrapper = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 70%;
-    margin: 0 auto;
+    flex-direction: column;
+    margin: 1rem;
 `
 const MakerOrdersWrapper = styled.div`
     margin: 1rem;
@@ -57,12 +56,8 @@ const TakerOrdersWrapper = styled.div`
 `
 const UserVolumesWrapper = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-content: space-around;
-    width: 70%;
-    margin: 0 auto;
-    margin-top: 1rem;
+    flex-direction: column;
+    margin: 1rem;
 `
 
 const MakerVolumesWrapper = styled.div`
@@ -76,44 +71,57 @@ const TakerVolumesWrapper = styled.div`
 function User() {
     const router = useRouter()
     const { addr } = router.query
-    const userAddress = addr ? addr[0]: ""
+    const userAddress = addr ? addr[0] : ""
     const { data, loading, error } = usePolledQuery(LOAD_USER_DATA, { addr: userAddress.toLowerCase() })
-    console.log(data)
-    return (<UserWrapper>
+    if (data && !data.user) {
+        return (
+            <div>
+                <Title>
+                    No data available
+                </Title>
+            </div>
+        )
+    }
+    const hasMakerOrders = data && data.user.makerOrders.length > 0
+    const hasTakerOrders = data && data.user.takerOrders.length > 0
+    const hasMakerVolumes = data && data.user.makerTokenVolumes.length > 0
+    const hasTakerVolumes = data && data.user.takerTokenVolumes.length > 0
+
+    return (<div>
         <Title>
             User Analytics for {addr}
         </Title>
-        <UserOrdersWrapper>
-            <MakerOrdersWrapper>
-                <Title>
-                    Maker Orders
-                </Title>
-            </MakerOrdersWrapper>
-            <TakerOrdersWrapper>
-                 <Title>
-                    Taker Orders
-                </Title>
-            </TakerOrdersWrapper>
+        <UserWrapper>
+            <UserOrdersWrapper>
+                {hasMakerOrders && <MakerOrdersWrapper>
+                    <Title>
+                        Maker Orders
+                    </Title>
+                    {data && <Orders orders={data.user.makerOrders} />}
+                </MakerOrdersWrapper>}
+                {hasTakerOrders && <TakerOrdersWrapper>
+                    <Title>
+                        Taker Orders
+                    </Title>
+                    {data && <Orders orders={data.user.takerOrders} />}
+                </TakerOrdersWrapper>}
+            </UserOrdersWrapper>
+            <UserVolumesWrapper>
+                {hasMakerVolumes && <MakerVolumesWrapper>
+                    <Title>
+                        Maker Volumes
+                    </Title>
+                    {data && <Volumes volumes={data.user.makerTokenVolumes} />}
+                </MakerVolumesWrapper>}
+                {hasTakerVolumes && <TakerVolumesWrapper>
+                    <Title>
+                        Taker Volumes
+                    </Title>
+                    {data && <Volumes volumes={data.user.takerTokenVolumes} />}
 
-        </UserOrdersWrapper>
-
-        <UserVolumesWrapper>
-            <MakerVolumesWrapper>
-            <Title>
-                    Maker Volumes
-                </Title>
-            </MakerVolumesWrapper>
-            <TakerVolumesWrapper>
-                <Title>
-                    Taker Volumes
-                </Title>
-
-
-            </TakerVolumesWrapper>
-
-        </UserVolumesWrapper>
-
-
-    </UserWrapper>)
+                </TakerVolumesWrapper>}
+            </UserVolumesWrapper>
+        </UserWrapper>
+    </div>)
 }
 export default User

@@ -60,7 +60,7 @@ function Header({ children }) {
                 <LinkWrapper>
                     <Events>
                         <Nav name="Orders" path="/orders" />
-                        <Nav name="User" path="/user" />
+                        {/* <Nav name="User" path="/user" /> */}
                     </Events>
                 </LinkWrapper>
 

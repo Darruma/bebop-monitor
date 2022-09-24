@@ -34,31 +34,33 @@ function TxLink({ id }) {
     )
 }
 export function Order({ order }) {
-    return ( <div>
+    return (<div>
         <OrderWrapper>
 
             <ItemWrapper>
                 <DataWrapper>
-                    <DataText><TxLink id={order.id} /></DataText>
                     <TitleText>Tx</TitleText>
+                    <DataText><TxLink id={order.id} /></DataText>
                 </DataWrapper>
                 <DataWrapper>
-                    <DataText>{order.blockNumber}</DataText>
                     <TitleText>Block</TitleText>
+                    <DataText>{order.blockNumber}</DataText>
                 </DataWrapper>
                 <DataWrapper>
+                    <TitleText>Taker</TitleText>
                     <DataText>
                         <UserLink id={order.taker.id} />
                     </DataText>
-                    <TitleText>Taker</TitleText>
+
                 </DataWrapper>
                 <DataWrapper>
+                    <TitleText>Maker</TitleText>
                     <DataText>
                         <UserLink id={order.maker.id} />
                     </DataText>
-                    <TitleText>Maker</TitleText>
                 </DataWrapper>
             </ItemWrapper>
+            <br/>
             <OrderInfo order={order} />
         </OrderWrapper>
     </div>)
@@ -67,7 +69,7 @@ export function Orders({ orders }) {
     return (
         <ItemsWrapper>
             {orders.map(o => {
-                return <Order order={o}/>
+                return <Order order={o} />
             })}
         </ItemsWrapper>
     )
