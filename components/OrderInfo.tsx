@@ -31,6 +31,7 @@ function OrderInfo(props) {
     if (baseTokens.length >= quoteTokens.length) {
         arrows = baseTokens.map((bt, index) => {
             return <Xarrow
+                key={index}
                 startAnchor={"right"}
                 endAnchor={"left"}
                 start={`order-input-${props.order.id}-${index}`} end={`order-output-${props.order.id}`} />
@@ -39,6 +40,7 @@ function OrderInfo(props) {
     if (quoteTokens.length > baseTokens.length) {
         arrows = quoteTokens.map((bt, index) => {
             return <Xarrow
+                key={index}
                 startAnchor={"right"}
                 endAnchor={"left"}
                 start={`order-input-${props.order.id}`} end={`order-output-${props.order.id}-${index}`} />
@@ -50,7 +52,7 @@ function OrderInfo(props) {
             {baseTokens.map((bt, index) => {
                 let outputId = (quoteTokens.length > baseTokens.length) ? `order-input-${props.order.id}` : `order-input-${props.order.id}-${index}`
                 const amount = props.order.baseAmounts[index] / Math.pow(10, bt.decimals)
-                return (<OrderData>
+                return (<OrderData key={index}>
                     <span id={outputId}>
                         {amount.toLocaleString()} {bt.symbol}
                     </span>
@@ -62,7 +64,7 @@ function OrderInfo(props) {
             {quoteTokens.map((qt, index) => {
                 let outputId = (quoteTokens.length <= baseTokens.length) ? `order-output-${props.order.id}` : `order-output-${props.order.id}-${index}`
                 const amount = props.order.quoteAmounts[index] / Math.pow(10, qt.decimals)
-                return (<OrderData>
+                return (<OrderData key={index}>
                     <span id={outputId}>
                         {amount.toLocaleString()} {qt.symbol}
                     </span>

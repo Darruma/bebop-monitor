@@ -69,7 +69,7 @@ export function Orders({ orders }) {
     return (
         <ItemsWrapper>
             {orders.map(o => {
-                return <Order order={o} />
+                return <Order key={o.id} order={o} />
             })}
         </ItemsWrapper>
     )

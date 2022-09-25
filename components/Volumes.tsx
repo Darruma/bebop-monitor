@@ -16,7 +16,7 @@ export function Volumes({ volumes }) {
             const formattedTokenAmount = formatTokenValue(amount)
             const value = (amount * 0.1).toLocaleString()
             return (
-            <ItemWrapper>
+            <ItemWrapper key={v.id}>
                 <DataWrapper>
                     <TitleText>Token</TitleText>
                     <DataText>{v.token.symbol}</DataText>
