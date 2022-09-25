@@ -39,6 +39,9 @@ export const SearchInput = styled.input`
 export const UserWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    @media(max-width: 1400px) {
+        flex-direction: column;
+    }
     justify-content: center;
     margin: 0
     color: white;
