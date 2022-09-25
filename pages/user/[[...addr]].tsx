@@ -5,6 +5,7 @@ import { LOAD_USER_DATA } from "../../apollo/queries"
 import { Title } from "../../components/Events"
 import { Orders } from "../../components/Orders"
 import { Volumes } from "../../components/Volumes"
+import { usePrices } from "../../context/prices"
 
 export const SearchContainer = styled.div`
     box-sizing: border-box;
@@ -72,6 +73,7 @@ function User() {
     const router = useRouter()
     const { addr } = router.query
     const userAddress = addr ? addr[0] : ""
+    const prices = usePrices()
     const { data, loading, error } = usePolledQuery(LOAD_USER_DATA, { addr: userAddress.toLowerCase() })
     if (data && !data.user) {
         return (
@@ -111,13 +113,13 @@ function User() {
                     <Title>
                         Maker Volumes
                     </Title>
-                    {data && <Volumes volumes={data.user.makerTokenVolumes} />}
+                    {data && <Volumes volumes={data.user.makerTokenVolumes} prices={prices} />}
                 </MakerVolumesWrapper>}
                 {hasTakerVolumes && <TakerVolumesWrapper>
                     <Title>
                         Taker Volumes
                     </Title>
-                    {data && <Volumes volumes={data.user.takerTokenVolumes} />}
+                    {data && <Volumes volumes={data.user.takerTokenVolumes} prices={prices} />}
 
                 </TakerVolumesWrapper>}
             </UserVolumesWrapper>

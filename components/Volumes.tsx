@@ -9,12 +9,14 @@ const VolumesWrapper = styled.div`
     margin-top: 2.5rem;
     border-radius: 1rem;
 `
-export function Volumes({ volumes }) {
+export function Volumes({ volumes, prices }) {
+    
     return <VolumesWrapper>
         {volumes.map(v  => {
+            const tokenAddress = v.id.split("-")[1]
             const amount = v.amount / Math.pow(10, v.token.decimals)
             const formattedTokenAmount = formatTokenValue(amount)
-            const value = (amount * 0.1).toLocaleString()
+            const value = (amount * prices[tokenAddress]).toLocaleString()
             return (
             <ItemWrapper key={v.id}>
                 <DataWrapper>

@@ -4,18 +4,23 @@ import { AppProps } from 'next/app';
 import "../styles/globals.css"
 import Header from '../components/Header';
 import Head from 'next/head';
+import { PricesProvider } from '../context/prices';
 function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
-      <Head>
-        <title>Bebop Monitor</title>
-        <meta name="description" content="Bebop Event Monitor" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-      </Head>
+      <PricesProvider>
 
-      <Header>
-        <Component {...pageProps} />
-      </Header>
+        <Head>
+          <title>Bebop Monitor</title>
+          <meta name="description" content="Bebop Event Monitor" />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+
+        <Header>
+          <Component {...pageProps} />
+        </Header>
+
+      </PricesProvider>
     </ApolloProvider>
   )
 }

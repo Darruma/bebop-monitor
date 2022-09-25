@@ -96,3 +96,10 @@ export const LOAD_USER_DATA = gql`
         }
     } 
 `
+export const LOAD_TOKENS = gql`
+    query loadTokens {
+        tokens(first: 100) {
+            id
+        }
+    }
+`
