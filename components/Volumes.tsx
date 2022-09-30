@@ -1,7 +1,7 @@
 
 import styled from "styled-components"
 import { formatTokenValue, formatValue } from "../utils"
-import { DataText, DataWrapper, ItemWrapper, TitleText } from "./Events"
+import { DataText, DataWrapper, ItemsWrapper, ItemWrapper, TitleText } from "./Events"
 
 const VolumesWrapper = styled.div`
     color: white;
@@ -9,7 +9,16 @@ const VolumesWrapper = styled.div`
     margin: 0 auto;
     width: fit-content;
     margin-top: 2.5rem;
+    min-width: 300px;
     border-radius: 1rem;
+`
+const VolumeItemWrapper = styled(ItemWrapper)`
+    min-width: 150px
+`
+const VolumeDataWrapper = styled(DataWrapper)`
+    @media (max-width: 800px) {
+        min-width: auto;
+    }
 `
 export function Volumes({ volumes, prices }) {
 
@@ -26,21 +35,20 @@ export function Volumes({ volumes, prices }) {
             const formattedTokenAmount = formatTokenValue(v.amount)
             const formattedValue = formatValue(v.value)
             return (
-                <ItemWrapper key={v.id}>
-                    <DataWrapper>
+                <VolumeItemWrapper key={v.id}>
+                    <VolumeDataWrapper>
                         <TitleText>Token</TitleText>
                         <DataText>{v.symbol}</DataText>
-                    </DataWrapper>
-                    <DataWrapper>
+                    </VolumeDataWrapper>
+                    <VolumeDataWrapper>
                         <TitleText>Amount</TitleText>
                         <DataText>{formattedTokenAmount}</DataText>
-                    </DataWrapper>
-                    <DataWrapper>
+                    </VolumeDataWrapper>
+                    <VolumeDataWrapper>
                         <TitleText>Value</TitleText>
                         <DataText>${formattedValue}</DataText>
-                    </DataWrapper>
-
-                </ItemWrapper>)
+                    </VolumeDataWrapper>
+                </VolumeItemWrapper>)
         })}
     </VolumesWrapper>
 }

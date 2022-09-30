@@ -20,6 +20,7 @@ export const ItemWrapper = styled.div`
 export const DataWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    text-align: center;
     min-width: 150px;
     @media (max-width: 800px) {
         flex: 0 0 0
@@ -33,7 +34,7 @@ export const TitleText = styled.div`
     color: #9CA3AF;
 `
 export const DataText = styled.div`
-    font-size: 25px;
+    font-size: 20px;
 `
 
 export const Title = styled.div`
@@ -41,4 +42,5 @@ export const Title = styled.div`
     color: white;
     text-align: center;
     margin-top: 2rem;
+    word-wrap: break-word;
 `
