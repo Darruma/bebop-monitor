@@ -1,5 +1,6 @@
 
 import styled from "styled-components"
+import { Prices, Volume } from "../apollo/types"
 import { formatTokenValue, formatValue } from "../utils"
 import { DataText, DataWrapper, ItemsWrapper, ItemWrapper, TitleText } from "./Events"
 
@@ -20,7 +21,8 @@ const VolumeDataWrapper = styled(DataWrapper)`
         min-width: auto;
     }
 `
-export function Volumes({ volumes, prices }) {
+
+export function Volumes({ volumes, prices }: { volumes: Volume[], prices: Prices }) {
 
     return <VolumesWrapper>
         {volumes.map(v => {

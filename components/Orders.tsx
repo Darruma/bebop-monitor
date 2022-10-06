@@ -1,6 +1,7 @@
 
 import Link from "next/link"
 import styled from "styled-components"
+import { Order as OrderType } from "../apollo/types"
 import { ItemsWrapper, ItemWrapper, DataWrapper, DataText, TitleText, Title } from "../components/Events"
 import OrderInfo from "../components/OrderInfo"
 import { ETHERSCAN_URL } from "../constants"
@@ -33,7 +34,7 @@ function TxLink({ id }) {
         </a>
     )
 }
-export function Order({ order }) {
+export function Order({ order }: {order: OrderType}) {
     return (<div>
         <OrderWrapper>
 
@@ -64,7 +65,7 @@ export function Order({ order }) {
         </OrderWrapper>
     </div>)
 }
-export function Orders({ orders }) {
+export function Orders({ orders }: {orders: OrderType[]}) {
     return (
         <ItemsWrapper>
             {orders.map(o => {

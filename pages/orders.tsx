@@ -2,8 +2,9 @@ import { useMemo, useState } from "react"
 import styled from "styled-components"
 import { usePolledQuery } from "../apollo/hooks"
 import { LOAD_ORDERS } from "../apollo/queries"
+import { OrderQueryData } from "../apollo/types"
 import { Title } from "../components/Events"
-import { Order, Orders } from "../components/Orders"
+import { Orders } from "../components/Orders"
 
 export const OrderWrapper = styled.div`
     display: flex;
@@ -40,7 +41,8 @@ enum OrdersFilter {
 }
 
 function OrderPage() {
-    const { data, loading, error } = usePolledQuery(LOAD_ORDERS)
+    const query = usePolledQuery(LOAD_ORDERS)
+    const { data, loading }: {data: OrderQueryData, loading: boolean} = query
     const [ordersFilter, setOrdersFilter] = useState<OrdersFilter>(OrdersFilter.None)
     const orders = useMemo(() => {
         if (data) {

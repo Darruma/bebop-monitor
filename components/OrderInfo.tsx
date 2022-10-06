@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Xarrow from "react-xarrows";
+import { Order, Token } from "../apollo/types";
 
 const OrderInfoWrapper = styled.div`
     display: flex;
@@ -19,15 +20,17 @@ const OrderOutput = styled.div`
 const OrderData = styled.div`
     font-size: 20px;
 `
-function sortTokens(tokens) {
+function sortTokens(tokens: Token[]) {
     return tokens.sort((a, b) => {
         const aID = Number(a.id.split("-")[0])
         const bID = Number(b.id.split("-")[0])
         return aID - bID
     })
 }
-
-function OrderInfo(props) {
+interface OrderInfoProps {
+    order: Order
+}
+function OrderInfo(props: OrderInfoProps) {
     const baseTokens = sortTokens(props.order.baseTokens.slice())
     const quoteTokens = sortTokens(props.order.quoteTokens.slice())
     let arrows;

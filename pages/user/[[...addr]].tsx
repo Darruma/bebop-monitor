@@ -6,6 +6,7 @@ import { Title } from "../../components/Events"
 import { Orders } from "../../components/Orders"
 import { Volumes } from "../../components/Volumes"
 import { usePrices } from "../../context/prices"
+import { UserType, UserQueryData } from "../../apollo/types"
 
 export const SearchContainer = styled.div`
     box-sizing: border-box;
@@ -77,7 +78,9 @@ function User() {
     const { addr } = router.query
     const userAddress = addr ? addr[0] : ""
     const prices = usePrices()
-    const { data, loading, error } = usePolledQuery(LOAD_USER_DATA, { addr: userAddress.toLowerCase() })
+    const  query = usePolledQuery(LOAD_USER_DATA, { addr: userAddress.toLowerCase() })
+    const { data, loading }: {data: UserQueryData, loading: boolean} = query
+
     if (data && !data.user) {
         return (
             <div>
