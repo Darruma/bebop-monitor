@@ -51,7 +51,6 @@ export function Order({ order }) {
                     <DataText>
                         <UserLink id={order.taker.id} />
                     </DataText>
-
                 </DataWrapper>
                 <DataWrapper>
                     <TitleText>Maker</TitleText>

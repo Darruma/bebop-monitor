@@ -19,14 +19,17 @@ const OrderOutput = styled.div`
 const OrderData = styled.div`
     font-size: 20px;
 `
-function OrderInfo(props) {
+function sortTokens(tokens) {
+    return tokens.sort((a, b) => {
+        const aID = Number(a.id.split("-")[0])
+        const bID = Number(b.id.split("-")[0])
+        return aID - bID
+    })
+}
 
-    const baseTokens = props.order.baseTokens.slice().sort((a, b) => {
-        return Number(a.id[0]) > Number(b.id[0])
-    })
-    const quoteTokens = props.order.quoteTokens.slice().sort((a, b) => {
-        return Number(a.id[0]) > Number(b.id[0])
-    })
+function OrderInfo(props) {
+    const baseTokens = sortTokens(props.order.baseTokens.slice())
+    const quoteTokens = sortTokens(props.order.quoteTokens.slice())
     let arrows;
     if (baseTokens.length >= quoteTokens.length) {
         arrows = baseTokens.map((bt, index) => {
